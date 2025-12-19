@@ -1,0 +1,29 @@
+name: build-macos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install pyinstaller
+
+      - name: Build macOS app
+        run: |
+          python3 -m PyInstaller --noconfirm --windowed --name TimeDocuDownloader sftp_download.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TimeDocuDownloader-mac
+          path: dist/*
