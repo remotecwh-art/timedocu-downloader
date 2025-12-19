@@ -1,0 +1,11 @@
+﻿# PyInstaller
+build/
+dist/
+*.spec
+
+# Runtime data
+tizstudio_download/
+
+# Python
+__pycache__/
+*.pyc
